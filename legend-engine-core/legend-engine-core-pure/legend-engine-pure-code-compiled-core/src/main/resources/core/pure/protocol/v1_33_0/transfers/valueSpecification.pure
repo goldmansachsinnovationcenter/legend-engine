@@ -213,6 +213,28 @@ function <<access.private>> meta::protocols::pure::v1_33_0::transformation::from
     $v.values->isEmpty() && $v.multiplicity == PureOne && (($rawType->instanceOf(DataType) && !$rawType->instanceOf(Unit)) || $rawType->instanceOf(Class) && (($ishacked && $rawType.name != 'Class') || (!$ishacked && $rawType.name == 'Class')));
 }
 
+// Add this function to handle Variable to ValueSpecification conversion
+function meta::protocols::pure::v1_33_0::transformation::fromPureGraph::valueSpecification::variableToValueSpecification(variable:meta::protocols::pure::v1_33_0::metamodel::valueSpecification::Variable[1]):meta::protocols::pure::v1_33_0::metamodel::valueSpecification::ValueSpecification[1]
+{
+   // Since Variable already extends ValueSpecification, a simple cast is sufficient
+   $variable->cast(@meta::protocols::pure::v1_33_0::metamodel::valueSpecification::ValueSpecification);
+}
+
+// Add this function to handle GenericType to ValueSpecification conversion
+function meta::protocols::pure::v1_33_0::transformation::fromPureGraph::valueSpecification::genericTypeToValueSpecification(genericType:meta::protocols::pure::v1_33_0::metamodel::m3::type::generics::GenericType[1]):meta::protocols::pure::v1_33_0::metamodel::valueSpecification::ValueSpecification[1]
+{
+   // Create an instance value with the appropriate type specified by the GenericType
+   ^meta::protocols::pure::v1_33_0::metamodel::valueSpecification::raw::ClassInstance(
+      _type = 'classInstance',
+      type = $genericType.rawType->elementToPath(),
+      multiplicity = ^meta::protocols::pure::v1_33_0::metamodel::domain::Multiplicity(
+         lowerBound = 1,
+         upperBound = 1
+      ),
+      values = []
+   );
+}
+
 function <<access.private>> meta::protocols::pure::v1_33_0::transformation::fromPureGraph::valueSpecification::transformHackedClass(v:InstanceValue[1]):meta::protocols::pure::v1_33_0::metamodel::valueSpecification::raw::GenericTypeInstance[1]
 {
    ^meta::protocols::pure::v1_33_0::metamodel::valueSpecification::raw::GenericTypeInstance
