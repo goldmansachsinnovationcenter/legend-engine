@@ -1,0 +1,109 @@
+// Copyright 2024 Goldman Sachs
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import meta::pure::test::pct::*;
+import meta::pure::metamodel::relation::*;
+import meta::pure::tds::*;
+import meta::pure::functions::relation::*;
+
+Class meta::pure::functions::relation::_WindowDefinition<T> extends meta::pure::functions::relation::_Window<T>
+{
+  name: String[1];
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], cols:String[*], sortInfo:meta::pure::functions::relation::SortInfo<(?:?)⊆T>[*], frame:meta::pure::functions::relation::Frame[0..1]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  ^meta::pure::functions::relation::_WindowDefinition<T>
+  (
+    name=$name,
+    partition=$cols,
+    sortInfo=$sortInfo,
+    frame = $frame
+  );
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], cols:meta::pure::metamodel::relation::ColSpec<(?:?)⊆T>[1]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  ^_WindowDefinition<T>
+  (
+    name=$name,
+    partition=$cols.name
+  );
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], cols:meta::pure::metamodel::relation::ColSpecArray<(?:?)⊆T>[1]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  ^_WindowDefinition<T>
+  (
+    name=$name,
+    partition=$cols.names
+  );
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], sortInfo:meta::pure::functions::relation::SortInfo<(?:?)⊆T>[*]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  window($name, [], $sortInfo, [])
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], frame:meta::pure::functions::relation::Frame[1]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  window($name, [], [], $frame)
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], cols:meta::pure::metamodel::relation::ColSpec<(?:?)⊆T>[1], sortInfo:meta::pure::functions::relation::SortInfo<(?:?)⊆T>[*]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  window($name, $cols.name, $sortInfo, [])
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], cols:meta::pure::metamodel::relation::ColSpecArray<(?:?)⊆T>[1], sortInfo:meta::pure::functions::relation::SortInfo<(?:?)⊆T>[*]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  window($name, $cols.names, $sortInfo, [])
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], cols:meta::pure::metamodel::relation::ColSpec<(?:?)⊆T>[1], frame:meta::pure::functions::relation::Frame[1]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  window($name, $cols.name, [], $frame)
+}
+
+function
+    <<functionType.NormalizeRequiredFunction,
+    PCT.function>>
+    meta::pure::functions::relation::window<T>(name:String[1], sortInfo:meta::pure::functions::relation::SortInfo<(?:?)⊆T>[*], frame:meta::pure::functions::relation::Frame[1]):meta::pure::functions::relation::_WindowDefinition<T>[1]
+{
+  window($name, [], $sortInfo, $frame)
+}

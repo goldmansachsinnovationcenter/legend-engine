@@ -151,6 +151,9 @@ Class  {doc.doc = 'Normal Project column, also used for extending a TDS'}
 meta::pure::tds::BasicColumnSpecification<T> extends meta::pure::tds::ColumnSpecification<T>
 {
    func : Function<{T[1]->Any[*]}>[1];
+   type : ColumnSpecType[0..1];
+   window : Window<T>[0..1];
+   operation : OlapOperation<T>[0..1];
 }
 
 Enum meta::pure::tds::SortDirection
@@ -170,9 +173,27 @@ Class meta::pure::tds::ColumnSort<T>
    direction:SortDirection[1];
 }
 
+Class meta::pure::tds::Frame
+{
+   isPreceding: Boolean[1];
+   isFollowing: Boolean[1];
+   offset: Integer[0..1];
+}
+
+Enum meta::pure::tds::ColumnSpecType
+{
+   BASIC,
+   WINDOW,
+   OLAP,
+   AGGREGATE
+}
+
 Class meta::pure::tds::Window<T>
 {
    partition:Function<{T[1]->Any[1]}>[*];
+   name:String[0..1];
+   sortBy:SortInformation[*];
+   frame:meta::pure::tds::Frame[0..1];
 }
 
 Class meta::pure::tds::OlapOperation<T>
@@ -476,6 +497,302 @@ function
 }
 
 function 
+   {doc.doc = 'Extend a TDS with new columns based on BasicColumnSpecification definitions'}
+   meta::pure::tds::extend(tds:TabularDataSet[1], columnSpecifications:BasicColumnSpecification<TDSRow>[*]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)>'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:BasicColumnSpecification<TDSRow>[*]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on an array of exactly 2 BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)>'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:BasicColumnSpecification<TDSRow>[2]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with a single BasicColumnSpecification definition - specialized for TDS<(id:Integer, val:Float)>'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecification:BasicColumnSpecification<TDSRow>[1]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      [^TDSColumn(
+         name = $columnSpecification.name,
+         offset = $tds.columns->size(),
+         type = $columnSpecification.func->functionReturnType().rawType->toOne()->cast(@DataType)
+      )]
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               [$columnSpecification.func->eval(^TDSRow(parent = $tds, values = $r.values))]
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on an array of BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)> with array parameter'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:BasicColumnSpecification<TDSRow>[*]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on an array of exactly 2 BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)>'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:meta::pure::tds::BasicColumnSpecification<TDSRow>[2]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on an array of BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)>'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:BasicColumnSpecification<TDSRow>[2]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)> with exactly 2 columns'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:BasicColumnSpecification<TDSRow>[2]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)> with exactly 1 column'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:BasicColumnSpecification<TDSRow>[1]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
+   {doc.doc = 'Extend a TDS with new columns based on BasicColumnSpecification definitions - specialized for TDS<(id:Integer, val:Float)> with array of 1 column'}
+   meta::pure::tds::extend(tds:TDS<(id:Integer, val:Float)>[1], columnSpecifications:BasicColumnSpecification<TDSRow>[1..1]):TabularDataSet[1]
+{
+   let newTds = ^TabularDataSet(columns = $tds.columns->concatenate(
+      $columnSpecifications->map(cs | 
+         ^TDSColumn(
+            name = $cs.name,
+            offset = $tds.columns->size() + $columnSpecifications->indexOf($cs),
+            type = $cs.func->functionReturnType().rawType->toOne()->cast(@DataType)
+         )
+      )
+   ));
+   
+   $newTds->mutateAdd('rows', 
+      $tds.rows->map(r | 
+         ^TDSRow(
+            parent = $newTds,
+            values = $r.values->concatenate(
+               $columnSpecifications->map(cs | 
+                  $cs.func->eval(^TDSRow(parent = $tds, values = $r.values))
+               )
+            )
+         )
+      )
+   );
+   
+   $newTds;
+}
+
+function 
    {doc.doc = 'Append the rows from the additional TDSs to the rows in the first TDS.  N.B. The column must be the same for the TDSs'}
    meta::pure::tds::concatenate(tds1:TabularDataSet[1], tdss:TabularDataSet[*]):TabularDataSet[1]
 {
@@ -721,6 +1038,144 @@ function meta::pure::tds::window<T>(functions:Function<{T[1]->Any[1]}>[*]):Windo
    ^Window<T>
    (
       partition=$functions
+   )
+}
+
+function meta::pure::tds::window<T>(name:String[1], cols:String[*], sortInfo:SortInformation[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=$cols->map(c | {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($c)}),
+      name=$name,
+      sortBy=[$sortInfo]
+   );
+}
+
+function meta::pure::tds::window<T>(name:String[1], cols:String[*], sortInfo:SortInformation[1], frame:meta::pure::tds::Frame[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=$cols->map(c | {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($c)}),
+      name=$name,
+      sortBy=[$sortInfo],
+      frame=$frame
+   );
+}
+
+function meta::pure::tds::window<T>(name:String[1], cols:String[*], sortInfo:SortInformation[*], frame:meta::pure::tds::Frame[0..1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=$cols->map(c | {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($c)}),
+      name=$name,
+      sortBy=$sortInfo,
+      frame=$frame
+   );
+}
+
+function meta::pure::tds::window<T>(name:String[1], cols:String[*]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=$cols->map(c | {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($c)}),
+      name=$name
+   )
+}
+
+function meta::pure::tds::window<T>(name:String[1], sortInfo:SortInformation[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      name=$name,
+      sortBy=[$sortInfo]
+   )
+}
+
+function meta::pure::tds::window<T>(name:String[1], col:String[1], sortInfo:SortInformation[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=[{x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col)}],
+      name=$name,
+      sortBy=[$sortInfo]
+   )
+}
+
+
+
+function meta::pure::tds::window<T>(name:String[1], cols:String[2], sortInfo:SortInformation[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=$cols->map(c | {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($c)}),
+      name=$name,
+      sortBy=[$sortInfo]
+   )
+}
+
+
+function meta::pure::tds::window<T>(name:String[1], cols:String[2], sortInfo:SortInformation[1], frame:meta::pure::tds::Frame[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=$cols->map(c | {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($c)}),
+      name=$name,
+      sortBy=[$sortInfo],
+      frame=$frame
+   )
+}
+
+
+
+
+function meta::pure::tds::window<T>(name:String[1], partition:Function<{T[1]->Any[1]}>[1], sortInfo:SortInformation[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=[$partition],
+      name=$name,
+      sortBy=[$sortInfo]
+   )
+}
+
+
+function meta::pure::tds::window<T>(name:String[1], col1:String[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=[{x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col1)}],
+      name=$name
+   )
+}
+
+function meta::pure::tds::window<T>(name:String[1], col1:String[1], col2:String[1], sortInfo:SortInformation[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=[{x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col1)}, {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col2)}],
+      name=$name,
+      sortBy=[$sortInfo]
+   )
+}
+
+function meta::pure::tds::window<T>(name:String[1], col1:String[1], col2:String[1], col3:String[1], sortInfo:SortInformation[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=[{x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col1)}, {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col2)}, {x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col3)}],
+      name=$name,
+      sortBy=[$sortInfo]
+   )
+}
+
+function meta::pure::tds::window<T>(name:String[1], col1:String[1], sortInfo:SortInformation[1], frame:meta::pure::tds::Frame[1]):Window<T>[1]
+{
+   ^Window<T>
+   (
+      partition=[{x:meta::pure::tds::TDSRow[1] | $x->cast(@TDSRow).get($col1)}],
+      name=$name,
+      sortBy=[$sortInfo],
+      frame=$frame
    )
 }
 

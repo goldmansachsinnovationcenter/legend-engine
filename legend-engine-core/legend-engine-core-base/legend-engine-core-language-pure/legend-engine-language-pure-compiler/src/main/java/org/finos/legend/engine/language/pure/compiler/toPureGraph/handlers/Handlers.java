@@ -947,6 +947,22 @@ public class Handlers
                 )
         );
 
+        register(m(
+                        m(
+                                h("meta::pure::functions::relation::window_String_1__ColSpec_1___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true),
+                                h("meta::pure::functions::relation::window_String_1__Frame_1___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true),
+                                h("meta::pure::functions::relation::window_String_1__ColSpecArray_1___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true),
+                                h("meta::pure::functions::relation::window_String_1__SortInfo_MANY___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true)),
+                        m(
+                                h("meta::pure::functions::relation::window_String_1__ColSpecArray_1__SortInfo_MANY___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true),
+                                h("meta::pure::functions::relation::window_String_1__ColSpec_1__Frame_1___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true),
+                                h("meta::pure::functions::relation::window_String_1__ColSpec_1__SortInfo_MANY___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true),
+                                h("meta::pure::functions::relation::window_String_1__SortInfo_MANY__Frame_1___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true),
+                                h("meta::pure::functions::relation::window_String_1__String_MANY__SortInfo_MANY__Frame_$0_1$___WindowDefinition_1_", false, ps -> OverReturnInference(ps, this.pureModel), ps -> Lists.fixedSize.of(ps.get(1)._genericType()), ps -> true)
+                        )
+                )
+        );
+
         register(grp(LambdaInference, h("meta::pure::functions::collection::exists_T_MANY__Function_1__Boolean_1_", true, ps -> res("Boolean", "one"), ps -> true)));
 
         register(grp(LambdaInference, h("meta::pure::functions::collection::forAll_T_MANY__Function_1__Boolean_1_", true, ps -> res("Boolean", "one"), ps -> true)));
