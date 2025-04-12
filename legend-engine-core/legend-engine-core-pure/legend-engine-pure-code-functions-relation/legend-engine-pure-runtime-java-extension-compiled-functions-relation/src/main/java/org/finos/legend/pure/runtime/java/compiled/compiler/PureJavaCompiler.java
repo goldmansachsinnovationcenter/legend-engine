@@ -66,14 +66,15 @@ public class PureJavaCompiler
         this.globalClassLoader = new MemoryClassLoader(this.coreClassLoader);
     }
 
-    public void compile(Iterable<? extends JavaFileObject> compilationUnits) throws PureJavaCompileException
+    public MemoryClassLoader compile(Iterable<? extends JavaFileObject> compilationUnits) throws PureJavaCompileException
     {
-        compile(compilationUnits, false);
+        return compile(compilationUnits, false);
     }
 
-    public void compile(Iterable<? extends JavaFileObject> compilationUnits, boolean isDynamic) throws PureJavaCompileException
+    public MemoryClassLoader compile(Iterable<? extends JavaFileObject> compilationUnits, boolean isDynamic) throws PureJavaCompileException
     {
         compile(compilationUnits, isDynamic ? this.dynamicManager : this.coreManager, getClassPath(), null);
+        return this.globalClassLoader;
     }
 
     public MemoryClassLoader getCoreClassLoader()
