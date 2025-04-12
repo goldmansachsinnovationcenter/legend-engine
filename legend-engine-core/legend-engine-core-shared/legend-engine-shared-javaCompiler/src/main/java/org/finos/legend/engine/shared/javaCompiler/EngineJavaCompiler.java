@@ -49,7 +49,7 @@ public class EngineJavaCompiler
     {
         this.compiler = ToolProvider.getSystemJavaCompiler();
         this.parent = parent;
-        this.javaVersion = (javaVersion != null) ? javaVersion : ((parent != null) ? parent.javaVersion : JavaVersion.JAVA_7);
+        this.javaVersion = (javaVersion != null) ? javaVersion : ((parent != null) ? parent.javaVersion : JavaVersion.JAVA_21);
         this.filterControl = new FilterControl(filter);
         this.memoryFileManager = new MemoryFileManager((parent == null) ? this.compiler.getStandardFileManager(null, null, null) : parent.memoryFileManager, this.filterControl);
         this.memoryClassLoader = newClassLoader();
@@ -160,13 +160,7 @@ public class EngineJavaCompiler
         }
 
         // source/target/release version
-        if (javaVersion == JavaVersion.JAVA_7)
-        {
-            options.with("-source").with("7");
-        }
-        // When JDK 9+ is allowed, use this code instead:
-        // else if (Runtime.version().version().get(0) <= 8)
-        else if (SourceVersion.latest().ordinal() <= 8)
+        if (SourceVersion.latest().ordinal() <= 8)
         {
             // if this JVM is version 8 or older, we use -source and -target options
             options.with("-source").with("8")
@@ -175,7 +169,7 @@ public class EngineJavaCompiler
         else
         {
             // if this JVM is version 9 or newer, we use the --release option
-            options.with("--release").with("8");
+            options.with("--release").with("21");
         }
 
         return options;

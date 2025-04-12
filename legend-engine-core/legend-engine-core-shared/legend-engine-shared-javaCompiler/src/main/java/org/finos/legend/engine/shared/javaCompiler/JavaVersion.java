@@ -17,5 +17,6 @@ package org.finos.legend.engine.shared.javaCompiler;
 public enum JavaVersion
 {
     JAVA_7,
-    JAVA_8
+    JAVA_8,
+    JAVA_21
 }
