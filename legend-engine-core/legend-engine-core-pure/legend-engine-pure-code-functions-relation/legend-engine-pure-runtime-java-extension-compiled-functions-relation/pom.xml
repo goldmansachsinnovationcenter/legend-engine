@@ -71,8 +71,9 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- PCT Generation plugin removed temporarily for Java 21 upgrade -->
-            <!-- Will be re-enabled once Java 21 compatibility is verified -->
+            <!-- PCT Generation plugin removed for Java 21 compatibility -->
+            <!-- This plugin requires legend-pure-m3-core-distributed which is not available for Java 21 -->
+            <!-- Will be re-enabled once the dependency is available for Java 21 -->
             
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
