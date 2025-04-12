@@ -17,12 +17,14 @@ package org.finos.legend.pure.runtime.java.compiled.compiler;
 import io.github.classgraph.ClassGraph;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
+import org.finos.legend.engine.shared.javaCompiler.MemoryClassLoader;
+import org.finos.legend.engine.shared.javaCompiler.MemoryFileManager;
+import org.finos.legend.pure.m3.serialization.runtime.Message;
 
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
-import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -35,10 +37,10 @@ public class PureJavaCompiler
 {
     private static final Map<ClassLoader, String> CLASSPATH_CACHE = Collections.synchronizedMap(new WeakHashMap<>());
 
-    private final JavaFileManager coreManager;
-    private final JavaFileManager dynamicManager;
-    private final ClassLoader coreClassLoader;
-    private final ClassLoader globalClassLoader;
+    private final MemoryFileManager coreManager;
+    private final MemoryFileManager dynamicManager;
+    private final MemoryClassLoader coreClassLoader;
+    private final MemoryClassLoader globalClassLoader;
 
     public PureJavaCompiler()
     {
@@ -47,12 +49,21 @@ public class PureJavaCompiler
 
     public PureJavaCompiler(ClassLoader parent)
     {
+        this(parent, null);
+    }
+    
+    public PureJavaCompiler(Message message)
+    {
+        this(Thread.currentThread().getContextClassLoader(), message);
+    }
+
+    public PureJavaCompiler(ClassLoader parent, Message message)
+    {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        StandardJavaFileManager standardFileManager = compiler.getStandardFileManager(null, null, null);
-        this.coreManager = standardFileManager;
-        this.dynamicManager = standardFileManager;
-        this.coreClassLoader = parent;
-        this.globalClassLoader = parent;
+        this.coreManager = new MemoryFileManager(compiler);
+        this.dynamicManager = new MemoryFileManager(compiler);
+        this.coreClassLoader = new MemoryClassLoader(this.coreManager, parent);
+        this.globalClassLoader = new MemoryClassLoader(this.dynamicManager, this.coreClassLoader);
     }
 
     public void compile(Iterable<? extends JavaFileObject> compilationUnits) throws PureJavaCompileException
@@ -65,22 +76,22 @@ public class PureJavaCompiler
         compile(compilationUnits, isDynamic ? this.dynamicManager : this.coreManager, getClassPath(), null);
     }
 
-    public ClassLoader getCoreClassLoader()
+    public MemoryClassLoader getCoreClassLoader()
     {
         return this.coreClassLoader;
     }
 
-    public ClassLoader getClassLoader()
+    public MemoryClassLoader getClassLoader()
     {
         return this.globalClassLoader;
     }
 
-    public JavaFileManager getFileManager()
+    public MemoryFileManager getFileManager()
     {
         return this.dynamicManager;
     }
 
-    public JavaFileManager getCoreFileManager()
+    public MemoryFileManager getCoreFileManager()
     {
         return this.coreManager;
     }
