@@ -37,8 +37,9 @@ public class PureJavaCompiler
     public PureJavaCompiler(ClassLoader parent)
     {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        this.coreManager = new MemoryFileManager(compiler.getStandardFileManager(null, null, null), null);
-        this.dynamicManager = new MemoryFileManager(compiler.getStandardFileManager(null, null, null), null);
+        javax.tools.JavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+        this.coreManager = new MemoryFileManager(fileManager, null);
+        this.dynamicManager = new MemoryFileManager(fileManager, null);
         this.coreClassLoader = new MemoryClassLoader(this.coreManager, parent);
         this.globalClassLoader = new MemoryClassLoader(this.dynamicManager, this.coreClassLoader);
     }
