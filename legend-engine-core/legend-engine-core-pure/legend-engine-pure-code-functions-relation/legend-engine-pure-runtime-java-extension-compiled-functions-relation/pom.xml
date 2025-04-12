@@ -183,6 +183,13 @@
             <version>0.12.0</version>
         </dependency>
 
+        <!-- Add dependency for legend-engine-shared-javaCompiler -->
+        <dependency>
+            <groupId>org.finos.legend.engine</groupId>
+            <artifactId>legend-engine-shared-javaCompiler</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
