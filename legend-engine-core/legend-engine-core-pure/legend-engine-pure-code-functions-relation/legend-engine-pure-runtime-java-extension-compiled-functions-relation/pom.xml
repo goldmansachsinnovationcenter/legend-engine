@@ -111,6 +111,11 @@
                         <artifactId>legend-pure-m3-core</artifactId>
                         <version>${legend.pure.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.finos.legend.pure</groupId>
+                        <artifactId>legend-pure-m3-core-distributed</artifactId>
+                        <version>${legend.pure.version}</version>
+                    </dependency>
                 </dependencies>
             </plugin>
             
