@@ -71,54 +71,8 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.finos.legend.pure</groupId>
-                <artifactId>legend-pure-maven-generation-pct</artifactId>
-                <configuration>
-                    <mode>Compiled</mode>
-                    <targetDir>${project.build.directory}/classes/pct-reports/</targetDir>
-                    <PCTTestSuites>
-                        <PCTTestSuite>org.finos.legend.pure.runtime.java.extension.relation.compiled.pure.Test_Compiled_RelationFunctions_PCT</PCTTestSuite>
-                    </PCTTestSuites>
-                    <skip>true</skip>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>PCT-Generation</id>
-                        <phase>process-test-classes</phase>
-                        <goals>
-                            <goal>generate-pct-report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.finos.legend.engine</groupId>
-                        <artifactId>legend-engine-pure-platform-java</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.finos.legend.engine</groupId>
-                        <artifactId>legend-engine-pure-functions-relation-pure</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.finos.legend.engine</groupId>
-                        <artifactId>legend-engine-pure-platform-dsl-tds-java</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.finos.legend.pure</groupId>
-                        <artifactId>legend-pure-m3-core</artifactId>
-                        <version>${legend.pure.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.finos.legend.pure</groupId>
-                        <artifactId>legend-pure-m3-core-distributed</artifactId>
-                        <version>${legend.pure.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+            <!-- PCT Generation plugin removed temporarily for Java 21 upgrade -->
+            <!-- Will be re-enabled once Java 21 compatibility is verified -->
             
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
