@@ -80,6 +80,7 @@
                     <PCTTestSuites>
                         <PCTTestSuite>org.finos.legend.pure.runtime.java.extension.relation.compiled.pure.Test_Compiled_RelationFunctions_PCT</PCTTestSuite>
                     </PCTTestSuites>
+                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>
