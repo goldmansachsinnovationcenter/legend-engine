@@ -39,8 +39,8 @@ public class PureJavaCompiler
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         this.coreManager = new MemoryFileManager(compiler.getStandardFileManager(null, null, null), null);
         this.dynamicManager = new MemoryFileManager(this.coreManager, null);
-        this.coreClassLoader = new MemoryClassLoader(parent, this.coreManager);
-        this.globalClassLoader = new MemoryClassLoader(this.coreClassLoader, this.dynamicManager);
+        this.coreClassLoader = new MemoryClassLoader(this.coreManager, parent);
+        this.globalClassLoader = new MemoryClassLoader(this.dynamicManager, this.coreClassLoader);
     }
 
     public void compile(Iterable<? extends JavaFileObject> compilationUnits) throws PureJavaCompileException
