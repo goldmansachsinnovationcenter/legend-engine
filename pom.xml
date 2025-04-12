@@ -319,7 +319,8 @@
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${maven.dependency.plugin.version}</version>
                     <configuration>
-                        <skip>true</skip>
+                        <failOnWarning>true</failOnWarning>
+                        <ignoreNonCompile>true</ignoreNonCompile>
                     </configuration>
                 </plugin>
                 <plugin>
