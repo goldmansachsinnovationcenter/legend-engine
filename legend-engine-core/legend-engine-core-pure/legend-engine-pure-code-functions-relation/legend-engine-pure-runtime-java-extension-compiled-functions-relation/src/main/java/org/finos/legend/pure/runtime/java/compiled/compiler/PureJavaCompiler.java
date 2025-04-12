@@ -38,8 +38,8 @@ public class PureJavaCompiler
 
     private final JavaFileManager coreManager;
     private final JavaFileManager dynamicManager;
-    private final ClassLoader coreClassLoader;
-    private final ClassLoader globalClassLoader;
+    private final MemoryClassLoader coreClassLoader;
+    private final MemoryClassLoader globalClassLoader;
 
     public PureJavaCompiler()
     {
@@ -62,8 +62,8 @@ public class PureJavaCompiler
         StandardJavaFileManager standardFileManager = compiler.getStandardFileManager(null, null, null);
         this.coreManager = standardFileManager;
         this.dynamicManager = standardFileManager;
-        this.coreClassLoader = parent;
-        this.globalClassLoader = parent;
+        this.coreClassLoader = new MemoryClassLoader(parent);
+        this.globalClassLoader = new MemoryClassLoader(this.coreClassLoader);
     }
 
     public void compile(Iterable<? extends JavaFileObject> compilationUnits) throws PureJavaCompileException
@@ -76,12 +76,12 @@ public class PureJavaCompiler
         compile(compilationUnits, isDynamic ? this.dynamicManager : this.coreManager, getClassPath(), null);
     }
 
-    public ClassLoader getCoreClassLoader()
+    public MemoryClassLoader getCoreClassLoader()
     {
         return this.coreClassLoader;
     }
 
-    public ClassLoader getClassLoader()
+    public MemoryClassLoader getClassLoader()
     {
         return this.globalClassLoader;
     }
