@@ -150,3 +150,42 @@ Class meta::relational::metamodel::TableMapper
   from : Table[1];
   to   : String[1];
 }
+
+Class meta::relational::metamodel::StoredProcedure extends meta::pure::metamodel::PackageableElement
+{
+  schema : Schema[1];
+  parameters : StoredProcedureParameter[*];
+  body : String[1];
+}
+
+Class meta::relational::metamodel::StoredProcedureParameter
+{
+  name : String[1];
+  type : meta::relational::metamodel::datatype::DataType[1];
+  direction : StoredProcedureParameterDirection[1];
+}
+
+Enum meta::relational::metamodel::StoredProcedureParameterDirection
+{
+  IN,
+  OUT,
+  INOUT
+}
+
+Class meta::relational::metamodel::CreateStoredProcedureSQL extends SQLQuery
+{
+  storedProcedure : StoredProcedure[1];
+  replaceIfExists : Boolean[1] = false;
+}
+
+Class meta::relational::metamodel::DropStoredProcedureSQL extends SQLQuery
+{
+  storedProcedure : StoredProcedure[1];
+  ifExists : Boolean[1] = false;
+}
+
+Class meta::relational::metamodel::ExecuteStoredProcedureSQL extends SQLQuery
+{
+  storedProcedure : StoredProcedure[1];
+  parameters : Map<String, Any>[0..1];
+}
