@@ -1191,6 +1191,13 @@
             <groupId>org.finos.legend.engine</groupId>
             <artifactId>legend-engine-xt-analytics-test-coverage-http-api</artifactId>
         </dependency>
+
+        <!-- Kafka -->
+        <dependency>
+            <groupId>org.finos.legend.engine</groupId>
+            <artifactId>legend-engine-xt-kafka-consumer-lag-api</artifactId>
+        </dependency>
+
         <!-- TEST -->
     </dependencies>
     <profiles>
