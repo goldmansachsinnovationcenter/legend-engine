@@ -1196,6 +1196,7 @@
         <dependency>
             <groupId>org.finos.legend.engine</groupId>
             <artifactId>legend-engine-xt-kafka-consumer-lag-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- TEST -->
