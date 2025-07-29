@@ -516,7 +516,7 @@ public class HelperRelationalGrammarComposer
     }
 
     //  We do this because the first join pointer requires the database pointer to be first inside the main join operator. See:
-    //  https://github.com/finos/legend-engine/blob/master/legend-engine-xt-relationalStore-grammar/src/main/antlr4/org/finos/legend/engine/language/pure/grammar/from/antlr4/RelationalParserGrammar.g4#L197
+    //  https://github.com/finos/legend-engine/blob/main/legend-engine-xt-relationalStore-grammar/src/main/antlr4/org/finos/legend/engine/language/pure/grammar/from/antlr4/RelationalParserGrammar.g4#L197
     private static String renderFirstJoinPointer(JoinPointer joinPointer)
     {
         return (joinPointer.db != null ? renderDatabasePointer(joinPointer.db) : "") +

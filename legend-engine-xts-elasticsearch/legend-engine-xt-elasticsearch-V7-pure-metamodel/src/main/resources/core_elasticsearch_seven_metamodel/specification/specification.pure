@@ -214,7 +214,7 @@ Class <<meta::external::store::elasticsearch::v7::metamodel::specification::ESPr
   fields: meta::external::store::elasticsearch::v7::metamodel::specification::LiteralOrExpression<String>[*];
 }
 
-Class <<meta::external::store::elasticsearch::v7::metamodel::specification::ESProfile.TaggedUnion>> {doc.doc = 'Whenever durations need to be specified, e.g. for a timeout parameter, the duration must specify the unit, like 2d for 2 days.', meta::external::store::elasticsearch::v7::metamodel::specification::ESProfile.docURL = 'https://github.com/elastic/elasticsearch/blob/master/libs/core/src/main/java/org/elasticsearch/core/TimeValue.java', meta::external::store::elasticsearch::v7::metamodel::specification::ESProfile.specLocation = '_types/Time.ts#L62-L68'} meta::external::store::elasticsearch::v7::metamodel::specification::types::Time
+Class <<meta::external::store::elasticsearch::v7::metamodel::specification::ESProfile.TaggedUnion>> {doc.doc = 'Whenever durations need to be specified, e.g. for a timeout parameter, the duration must specify the unit, like 2d for 2 days.', meta::external::store::elasticsearch::v7::metamodel::specification::ESProfile.docURL = 'https://github.com/elastic/elasticsearch/blob/main/libs/core/src/main/java/org/elasticsearch/core/TimeValue.java', meta::external::store::elasticsearch::v7::metamodel::specification::ESProfile.specLocation = '_types/Time.ts#L62-L68'} meta::external::store::elasticsearch::v7::metamodel::specification::types::Time
 [
   singleValueContainer: [
   $this.time->isNotEmpty(),

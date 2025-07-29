@@ -53,7 +53,7 @@ a DataSpace which is later leveraged by Legend Query to increase performance.
 ### File Generation Jar
 For each [Legend Studio](https://github.com/finos/legend-studio) project there is a build pipeline defined and maintained through code in [Legend SDLC](https://github.com/finos/legend-sdlc)
 through the project structure logic. Each project structure version has a structure of maven modules as well as build steps for each version.
-Artifact Generation extensions are processed as part of the [FileGenerationMojo](https://github.com/finos/legend-sdlc/blob/master/legend-sdlc-generation-file-maven-plugin/src/main/java/org/finos/legend/sdlc/generation/file/FileGenerationMojo.java). This maven mojo compiles your entities
+Artifact Generation extensions are processed as part of the [FileGenerationMojo](https://github.com/finos/legend-sdlc/blob/main/legend-sdlc-generation-file-maven-plugin/src/main/java/org/finos/legend/sdlc/generation/file/FileGenerationMojo.java). This maven mojo compiles your entities
 into the `PureModel` graph as well as loads all your ArtifactGenerationExtensions and runs all generations from the extensions. 
 
 It then packages the generated artifacts into the file-generation-jar and publishes it depending on the maven repo defined in your project. 

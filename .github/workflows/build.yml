@@ -21,16 +21,16 @@ env:
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 # Cancel running jobs from previous pipelines of the same workflow on PR to save resource when commits are pushed quickly
 # NOTE: we don't want this behavior on default branch
 # See https://stackoverflow.com/a/68422069
 concurrency:
-  group: ${{ github.ref == 'refs/heads/master' && format('ci-default-branch-{0}-{1}', github.sha, github.workflow) || format('ci-pr-{0}-{1}', github.ref, github.workflow) }}
+  group: ${{ github.ref == 'refs/heads/main' && format('ci-default-branch-{0}-{1}', github.sha, github.workflow) || format('ci-pr-{0}-{1}', github.ref, github.workflow) }}
   cancel-in-progress: true
 
 jobs:
@@ -84,14 +84,14 @@ jobs:
           theme: dark
 
       - name: Build (PR)
-        if: github.ref != 'refs/heads/master'
+        if: github.ref != 'refs/heads/main'
         env:
           MAVEN_OPTS: "-Xmx8g"
         run: |
           mvn -B -e -DskipTests=true install
 
       - name: Build (with Maven Deploy + Docker Snapshot)
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         env:
           DOCKER_USERNAME: finos
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

@@ -52,7 +52,7 @@ The SDL model is broken into two main sections: the type system (on the left) an
 
 ###### Introspection
 
-The introspection model is itself expressed using the SDL and, jumping a little ahead, it has been added to Legend using the following <a href="https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-pure/src/test/java/org/finos/legend/engine/code/core/GenerateIntrospectionPureModel.java">generation</a>.
+The introspection model is itself expressed using the SDL and, jumping a little ahead, it has been added to Legend using the following <a href="https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-pure/src/test/java/org/finos/legend/engine/code/core/GenerateIntrospectionPureModel.java">generation</a>.
 <BR/>
 <BR/>
 <div align="center" style="width:100%">
@@ -127,7 +127,7 @@ The code below illustrates the Java class generation for the 'Selection' Pure cl
 
 ### Grammar & Composer
 
-The GraphQL grammar was found in this <a href="https://github.com/antlr/grammars-v4/blob/master/graphql/GraphQL.g4">repository</a> and slightly <a href="https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-grammar/src/main/antlr4/org/finos/legend/engine/language/graphQL/grammar/from/antlr4/GraphQL.g4">modified</a> to account for some edge use case.
+The GraphQL grammar was found in this <a href="https://github.com/antlr/grammars-v4/blob/main/graphql/GraphQL.g4">repository</a> and slightly <a href="https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-grammar/src/main/antlr4/org/finos/legend/engine/language/graphQL/grammar/from/antlr4/GraphQL.g4">modified</a> to account for some edge use case.
 
 The <a href='https://github.com/finos/legend-engine/blob/94cd0aff3b314e568e830773f7200c8245baa09b/legend-engine-xt-graphQL-grammar/src/main/java/org/finos/legend/engine/language/graphQL/grammar/from/GraphQLGrammarParser.java#L177'>grammar parser</a> instantiates the generated Protocol classes.
 
@@ -211,10 +211,10 @@ The different use cases are:
 
 ###### Type system transformations
 
-- <a href='https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/toPure/sdl/toPure_sdl.pure'>SDL -> Pure</a> &nbsp;&nbsp;&nbsp;&nbsp; -> enables loading GraphQL SDL from file system into Studio
-- <a href='https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/fromPure/sdl/fromPure_sdl.pure'>Pure -> SDL</a> &nbsp;&nbsp;&nbsp;&nbsp; -> enables producing GraphQL SDL from Legend specification from within a build pipeline
-- <a href='https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/toPure/introspection/toPure_introspection.pure'>Introspection -> Pure</a>  &nbsp;&nbsp;&nbsp;&nbsp; -> enables dynamically loading GraphQL models from server endpoints into Studio
-- <a href='https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/fromPure/introspection/fromPure_Introspection.pure'>Pure -> Introspection</a> &nbsp;&nbsp;&nbsp;&nbsp; -> enables Legend as GraphQL endpoint, servicing its model to GraphQL clients
+- <a href='https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/toPure/sdl/toPure_sdl.pure'>SDL -> Pure</a> &nbsp;&nbsp;&nbsp;&nbsp; -> enables loading GraphQL SDL from file system into Studio
+- <a href='https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/fromPure/sdl/fromPure_sdl.pure'>Pure -> SDL</a> &nbsp;&nbsp;&nbsp;&nbsp; -> enables producing GraphQL SDL from Legend specification from within a build pipeline
+- <a href='https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/toPure/introspection/toPure_introspection.pure'>Introspection -> Pure</a>  &nbsp;&nbsp;&nbsp;&nbsp; -> enables dynamically loading GraphQL models from server endpoints into Studio
+- <a href='https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/binding/fromPure/introspection/fromPure_Introspection.pure'>Pure -> Introspection</a> &nbsp;&nbsp;&nbsp;&nbsp; -> enables Legend as GraphQL endpoint, servicing its model to GraphQL clients
 
 ###### Execution directive transformation
 

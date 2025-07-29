@@ -19,7 +19,7 @@ on:
     - cron: "0 0 * * 2" # every Tuesday on default/base branch
   push:
     branches:
-      - master
+      - main
     paths:
       - "**/Dockerfile"
   pull_request:

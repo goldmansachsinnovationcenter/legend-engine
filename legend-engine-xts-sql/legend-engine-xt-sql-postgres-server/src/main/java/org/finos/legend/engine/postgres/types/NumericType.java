@@ -67,8 +67,8 @@ class NumericType extends PGType<BigDecimal>
     @Override
     public int writeAsBinary(ByteBuf buffer, BigDecimal value)
     {
-        // Taken from https://github.com/cockroachdb/cockroach/blob/master/pkg/sql/pgwire/types.go#L336
-        // and https://github.com/postgres/postgres/blob/master/src/backend/utils/adt/numeric.c#L6760.
+        // Taken from https://github.com/cockroachdb/cockroach/blob/main/pkg/sql/pgwire/types.go#L336
+        // and https://github.com/postgres/postgres/blob/main/src/backend/utils/adt/numeric.c#L6760.
         // The number is split into chunks of DEC_DIGITS short values while leading and trailing 0's are omitted.
         // Examples:
         //  * 01234       -> [1234]

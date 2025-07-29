@@ -160,7 +160,7 @@ join:                                       JOIN identifier PAREN_OPEN operation
 
 // NOTE: we have the `...Right` parser rule to avoid mutually left-recursive rules. For example, the rule
 // `booleanOperation: operation booleanOperator operation` will cause ANTLR to throw error
-// See https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
+// See https://github.com/antlr/antlr4/blob/main/doc/left-recursion.md
 //
 // Also note that we split the rule `operation` because in `joinOperation` we cannot directly use `joinOperation` as the operation
 //

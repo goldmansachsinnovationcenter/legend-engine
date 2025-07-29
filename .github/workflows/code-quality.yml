@@ -19,7 +19,7 @@ on: [workflow_dispatch]
   # disable this code quality check to save resource
   # push:
   #   branches:
-  #     - master
+  #     - main
 
 env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -29,7 +29,7 @@ env:
 # NOTE: we don't want this behavior on default branch
 # See https://stackoverflow.com/a/68422069
 concurrency:
-  group: ${{ github.ref == 'refs/heads/master' && format('ci-default-branch-{0}-{1}', github.sha, github.workflow) || format('ci-pr-{0}-{1}', github.ref, github.workflow) }}
+  group: ${{ github.ref == 'refs/heads/main' && format('ci-default-branch-{0}-{1}', github.sha, github.workflow) || format('ci-pr-{0}-{1}', github.ref, github.workflow) }}
   cancel-in-progress: true
 
 jobs:

@@ -1,4 +1,4 @@
-[![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://finosfoundation.atlassian.net/wiki/display/FINOS/Incubating)
+[![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@main/images/badge-incubating.svg)](https://finosfoundation.atlassian.net/wiki/display/FINOS/Incubating)
 [![Maven Central](https://img.shields.io/maven-central/v/org.finos.legend.engine/legend-engine-server.svg)](https://central.sonatype.com/namespace/org.finos.legend.engine)
 ![Build CI](https://github.com/finos/legend-engine/workflows/Build%20CI/badge.svg)
 
@@ -57,7 +57,7 @@ Visit our [roadmap](https://github.com/finos/legend#roadmap) to know more about 
 
 ## Contributing
 
-Visit Legend [Contribution Guide](https://github.com/finos/legend/blob/master/CONTRIBUTING.md) to learn how to contribute to Legend.
+Visit Legend [Contribution Guide](https://github.com/finos/legend/blob/main/CONTRIBUTING.md) to learn how to contribute to Legend.
 
 ## License
 

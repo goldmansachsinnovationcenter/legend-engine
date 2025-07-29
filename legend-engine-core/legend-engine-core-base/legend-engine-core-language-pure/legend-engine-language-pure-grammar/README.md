@@ -21,7 +21,7 @@ Please add test, it's very helpful for other developers to see example of the gr
 
 ## Conventions
 
-We use ANTLR for parsing text. As of now, we made the decision to use [imports](https://github.com/antlr/antlr4/blob/master/doc/grammars.md#grammar-imports) to help modularize the grammar. The good side of this is we don't end up with a giant ANTLR definition that hard to keep track of, but the downside is we need to follow several conventions. Followings are some we would want contributors to follow for consistency and good UX/DX.
+We use ANTLR for parsing text. As of now, we made the decision to use [imports](https://github.com/antlr/antlr4/blob/main/doc/grammars.md#grammar-imports) to help modularize the grammar. The good side of this is we don't end up with a giant ANTLR definition that hard to keep track of, but the downside is we need to follow several conventions. Followings are some we would want contributors to follow for consistency and good UX/DX.
 
 ### Use unordered set where possible
 
@@ -77,6 +77,6 @@ To also avoid confusion, try to pack the source information with the protocol mo
 
 ### Avoid using `island grammar` when possible
 
-[ANTLR modes feature](https://github.com/antlr/antlr4/blob/master/doc/lexer-rules.md#lexical-modes) allow island grammar. As such, we can basically treat a code block as text and delegate the parsing to another grammar parser. We do this at several places, such as class mapping parsing. This technique is powerful in that it lets us break down the parser into smaller unit and allow modularization, but it has several downsides:
+[ANTLR modes feature](https://github.com/antlr/antlr4/blob/main/doc/lexer-rules.md#lexical-modes) allow island grammar. As such, we can basically treat a code block as text and delegate the parsing to another grammar parser. We do this at several places, such as class mapping parsing. This technique is powerful in that it lets us break down the parser into smaller unit and allow modularization, but it has several downsides:
 1. Potentially, it is slower, as it implies duplicated ANTLR parsing on the same code
 2. When delegating the code to another parser, we have to be extremely careful to accurately compute the source information offsets. Always add tests for this.
