@@ -218,7 +218,7 @@ The different use cases are:
 
 ###### Execution directive transformation
 
-- <a href='https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/transformation/transformation_graphFetch.pure'>Execution -> GraphFetch</a>
+- <a href='https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-pure/src/main/resources/core_external_query_graphql/transformation/transformation_graphFetch.pure'>Execution -> GraphFetch</a>
 
 The 'execution' transpiler transforms a GraphQL executable definition into a Legend Pure GraphFetch tree (metamodel below).
 <BR>
@@ -465,7 +465,7 @@ The production URL requires the maven coordinates of the released metadata (grou
 
 ###### External Format
 
-The query module also contains the 'external format' <a href='https://github.com/finos/legend-engine/blob/master/legend-engine-xt-graphQL-query/src/main/java/org/finos/legend/engine/query/graphQL/api/format/GraphQLFormatExtension.java'>plugin integration</a> which enables Studio to parse and generate GraphQL schemas.   
+The query module also contains the 'external format' <a href='https://github.com/finos/legend-engine/blob/main/legend-engine-xt-graphQL-query/src/main/java/org/finos/legend/engine/query/graphQL/api/format/GraphQLFormatExtension.java'>plugin integration</a> which enables Studio to parse and generate GraphQL schemas.   
 
 <BR/>
 <BR/>
