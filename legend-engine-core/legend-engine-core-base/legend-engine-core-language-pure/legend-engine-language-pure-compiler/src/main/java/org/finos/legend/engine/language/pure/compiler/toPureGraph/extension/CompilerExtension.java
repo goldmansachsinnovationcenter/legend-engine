@@ -31,6 +31,7 @@ import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.Funct
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.FunctionHandlerRegistrationInfo;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.Handlers;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.IncludedMappingHandler;
+import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.RuntimeCompilerHandler;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.validator.MappingValidatorContext;
 import org.finos.legend.engine.protocol.pure.v1.model.context.PureModelContextData;
 import org.finos.legend.engine.protocol.pure.v1.model.data.EmbeddedData;
@@ -223,6 +224,11 @@ public interface CompilerExtension extends LegendLanguageExtension
     }
 
     default Map<String, IncludedMappingHandler> getExtraIncludedMappingHandlers()
+    {
+        return Maps.mutable.empty();
+    }
+
+    default Map<String, RuntimeCompilerHandler> getExtraRuntimeCompilerHandlers()
     {
         return Maps.mutable.empty();
     }

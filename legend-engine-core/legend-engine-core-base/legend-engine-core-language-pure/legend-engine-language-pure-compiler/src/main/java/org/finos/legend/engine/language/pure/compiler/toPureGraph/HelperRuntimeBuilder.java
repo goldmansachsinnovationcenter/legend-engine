@@ -19,6 +19,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.utility.ListIterate;
+import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.RuntimeCompilerHandler;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.StoreProviderCompilerHelper;
 import org.finos.legend.engine.protocol.pure.v1.model.SourceInformation;
 import org.finos.legend.engine.protocol.pure.v1.model.context.EngineErrorType;
@@ -284,13 +285,15 @@ public class HelperRuntimeBuilder
     public static List<Root_meta_pure_runtime_PackageableRuntime> getMappingCompatibleRuntimes(
             Mapping mappingToCheck, List<PackageableRuntime> runtimes, PureModel pureModel)
     {
+        RuntimeCompilerHandler handler = getDefaultRuntimeCompilerHandler(pureModel);
         return ListIterate.collect(runtimes, runtime -> pureModel.getPackageableRuntime(runtime.getPath(), null)).distinct()
-                .select(runtime -> isRuntimeCompatibleWithMapping(runtime, mappingToCheck));
+                .select(runtime -> handler.isRuntimeCompatibleWithMapping(runtime, mappingToCheck));
     }
 
-    public static boolean isRuntimeCompatibleWithMapping(Root_meta_pure_runtime_PackageableRuntime runtime, Mapping mappingToCheck)
+    public static boolean isRuntimeCompatibleWithMapping(Root_meta_pure_runtime_PackageableRuntime runtime, Mapping mappingToCheck, PureModel pureModel)
     {
-        return isRuntimeCompatibleWithMapping(runtime._runtimeValue(), mappingToCheck);
+        RuntimeCompilerHandler handler = getDefaultRuntimeCompilerHandler(pureModel);
+        return handler.isRuntimeCompatibleWithMapping(runtime, mappingToCheck);
     }
 
     public static boolean isRuntimeCompatibleWithMapping(Root_meta_core_runtime_EngineRuntime runtime, Mapping mappingToCheck)
@@ -302,5 +305,10 @@ public class HelperRuntimeBuilder
             mappings.addAll(HelperMappingBuilder.getAllIncludedMappings(mapping).toSet());
             return mappings;
         }).anySatisfy(mappings -> mappings.contains(mappingToCheck));
+    }
+
+    private static RuntimeCompilerHandler getDefaultRuntimeCompilerHandler(PureModel pureModel)
+    {
+        return pureModel.getContext().getCompilerExtensions().getExtraRuntimeCompilerHandlers().values().iterator().next();
     }
 }

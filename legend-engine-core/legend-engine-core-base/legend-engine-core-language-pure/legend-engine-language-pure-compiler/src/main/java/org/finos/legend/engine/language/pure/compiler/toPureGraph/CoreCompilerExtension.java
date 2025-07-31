@@ -22,8 +22,10 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.data.core.EmbeddedDataCompilerHelper;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.extension.CompilerExtension;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.extension.Processor;
+import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.DefaultRuntimeCompilerHandler;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.IncludedMappingHandler;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.MappingIncludedMappingHandler;
+import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.RuntimeCompilerHandler;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.handlers.StoreProviderCompilerHelper;
 import org.finos.legend.engine.language.pure.compiler.toPureGraph.test.assertion.core.TestAssertionCompilerHelper;
 import org.finos.legend.engine.protocol.pure.v1.model.context.PackageableElementType;
@@ -77,6 +79,14 @@ public class CoreCompilerExtension implements CompilerExtension, EmbeddedDataCom
     {
         return Maps.mutable.of(
                 MappingIncludeMapping.class.getName(), new MappingIncludedMappingHandler()
+        );
+    }
+
+    @Override
+    public Map<String, RuntimeCompilerHandler> getExtraRuntimeCompilerHandlers()
+    {
+        return Maps.mutable.of(
+                "default", new DefaultRuntimeCompilerHandler()
         );
     }
 
