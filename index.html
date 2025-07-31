@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Catalog - Goldman Sachs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="https://via.placeholder.com/40x40/0066CC/FFFFFF?text=GS" alt="Goldman Sachs" class="logo">
+                <h1 class="brand-title">Data Catalog</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Browse</a>
+                <a href="#" class="nav-link">Analytics</a>
+                <a href="#" class="nav-link">Governance</a>
+                <a href="#" class="nav-link">Help</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="btn btn-outline">
+                    <i class="fas fa-plus"></i>
+                    Add Dataset
+                </button>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/32x32/666666/FFFFFF?text=U" alt="User" class="avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Discover and Access Enterprise Data</h2>
+                <p class="hero-subtitle">Find the right data assets for your analytics and business intelligence needs</p>
+                
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" placeholder="Search datasets, tables, reports..." class="search-input">
+                        <button class="search-btn">Search</button>
+                    </div>
+                    <div class="search-filters">
+                        <button class="filter-chip active">All</button>
+                        <button class="filter-chip">Datasets</button>
+                        <button class="filter-chip">Tables</button>
+                        <button class="filter-chip">Reports</button>
+                        <button class="filter-chip">APIs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">2,847</h3>
+                        <p class="stat-label">Data Assets</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">15,392</h3>
+                        <p class="stat-label">Tables</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">1,205</h3>
+                        <p class="stat-label">Reports</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">3,421</h3>
+                        <p class="stat-label">Active Users</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-layout">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="category-list">
+                            <li class="category-item">
+                                <a href="#" class="category-link active">
+                                    <i class="fas fa-chart-bar"></i>
+                                    Financial Data
+                                    <span class="count">847</span>
+                                </a>
+                            </li>
+                            <li class="category-item">
+                                <a href="#" class="category-link">
+                                    <i class="fas fa-users"></i>
+                                    Customer Data
+                                    <span class="count">623</span>
+                                </a>
+                            </li>
+                            <li class="category-item">
+                                <a href="#" class="category-link">
+                                    <i class="fas fa-globe"></i>
+                                    Market Data
+                                    <span class="count">412</span>
+                                </a>
+                            </li>
+                            <li class="category-item">
+                                <a href="#" class="category-link">
+                                    <i class="fas fa-shield-alt"></i>
+                                    Risk Data
+                                    <span class="count">298</span>
+                                </a>
+                            </li>
+                            <li class="category-item">
+                                <a href="#" class="category-link">
+                                    <i class="fas fa-cogs"></i>
+                                    Operations
+                                    <span class="count">187</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Data Sources</h3>
+                        <ul class="source-list">
+                            <li class="source-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox">
+                                    <span class="checkmark"></span>
+                                    Oracle Database
+                                </label>
+                            </li>
+                            <li class="source-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox">
+                                    <span class="checkmark"></span>
+                                    Snowflake
+                                </label>
+                            </li>
+                            <li class="source-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox">
+                                    <span class="checkmark"></span>
+                                    S3 Data Lake
+                                </label>
+                            </li>
+                            <li class="source-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox">
+                                    <span class="checkmark"></span>
+                                    Kafka Streams
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Content Area -->
+                <div class="content-area">
+                    <!-- Featured Datasets -->
+                    <section class="featured-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Featured Datasets</h2>
+                            <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="dataset-grid">
+                            <div class="dataset-card featured">
+                                <div class="card-header">
+                                    <div class="dataset-type">
+                                        <i class="fas fa-database"></i>
+                                        Dataset
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="action-btn">
+                                            <i class="fas fa-bookmark"></i>
+                                        </button>
+                                        <button class="action-btn">
+                                            <i class="fas fa-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="dataset-title">Global Market Prices</h3>
+                                    <p class="dataset-description">Real-time and historical market data including equity prices, forex rates, and commodity prices across global markets.</p>
+                                    <div class="dataset-meta">
+                                        <span class="meta-item">
+                                            <i class="fas fa-calendar"></i>
+                                            Updated daily
+                                        </span>
+                                        <span class="meta-item">
+                                            <i class="fas fa-eye"></i>
+                                            1,247 views
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="tags">
+                                        <span class="tag">Market Data</span>
+                                        <span class="tag">Real-time</span>
+                                    </div>
+                                    <div class="quality-score">
+                                        <span class="score-label">Quality:</span>
+                                        <div class="score-bar">
+                                            <div class="score-fill" style="width: 92%"></div>
+                                        </div>
+                                        <span class="score-value">92%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dataset-card">
+                                <div class="card-header">
+                                    <div class="dataset-type">
+                                        <i class="fas fa-table"></i>
+                                        Table
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="action-btn">
+                                            <i class="fas fa-bookmark"></i>
+                                        </button>
+                                        <button class="action-btn">
+                                            <i class="fas fa-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="dataset-title">Customer Transactions</h3>
+                                    <p class="dataset-description">Comprehensive transaction history including trade details, settlements, and customer interactions.</p>
+                                    <div class="dataset-meta">
+                                        <span class="meta-item">
+                                            <i class="fas fa-calendar"></i>
+                                            Updated hourly
+                                        </span>
+                                        <span class="meta-item">
+                                            <i class="fas fa-eye"></i>
+                                            892 views
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="tags">
+                                        <span class="tag">Customer Data</span>
+                                        <span class="tag">Transactions</span>
+                                    </div>
+                                    <div class="quality-score">
+                                        <span class="score-label">Quality:</span>
+                                        <div class="score-bar">
+                                            <div class="score-fill" style="width: 88%"></div>
+                                        </div>
+                                        <span class="score-value">88%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dataset-card">
+                                <div class="card-header">
+                                    <div class="dataset-type">
+                                        <i class="fas fa-chart-line"></i>
+                                        Report
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="action-btn">
+                                            <i class="fas fa-bookmark"></i>
+                                        </button>
+                                        <button class="action-btn">
+                                            <i class="fas fa-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="dataset-title">Risk Analytics Dashboard</h3>
+                                    <p class="dataset-description">Daily risk metrics and analytics including VaR calculations, stress test results, and portfolio exposures.</p>
+                                    <div class="dataset-meta">
+                                        <span class="meta-item">
+                                            <i class="fas fa-calendar"></i>
+                                            Updated daily
+                                        </span>
+                                        <span class="meta-item">
+                                            <i class="fas fa-eye"></i>
+                                            654 views
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="tags">
+                                        <span class="tag">Risk Data</span>
+                                        <span class="tag">Analytics</span>
+                                    </div>
+                                    <div class="quality-score">
+                                        <span class="score-label">Quality:</span>
+                                        <div class="score-bar">
+                                            <div class="score-fill" style="width: 95%"></div>
+                                        </div>
+                                        <span class="score-value">95%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Recently Added -->
+                    <section class="recent-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Recently Added</h2>
+                            <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="recent-list">
+                            <div class="recent-item">
+                                <div class="recent-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div class="recent-content">
+                                    <h4 class="recent-title">ESG Metrics Dataset</h4>
+                                    <p class="recent-description">Environmental, social, and governance metrics for portfolio companies</p>
+                                    <span class="recent-time">Added 2 hours ago</span>
+                                </div>
+                                <div class="recent-actions">
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                </div>
+                            </div>
+                            <div class="recent-item">
+                                <div class="recent-icon">
+                                    <i class="fas fa-table"></i>
+                                </div>
+                                <div class="recent-content">
+                                    <h4 class="recent-title">Trading Volumes Table</h4>
+                                    <p class="recent-description">Daily trading volumes across all asset classes and regions</p>
+                                    <span class="recent-time">Added 5 hours ago</span>
+                                </div>
+                                <div class="recent-actions">
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                </div>
+                            </div>
+                            <div class="recent-item">
+                                <div class="recent-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="recent-content">
+                                    <h4 class="recent-title">Compliance Report</h4>
+                                    <p class="recent-description">Monthly compliance metrics and regulatory reporting data</p>
+                                    <span class="recent-time">Added 1 day ago</span>
+                                </div>
+                                <div class="recent-actions">
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Data Catalog</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Browse Datasets</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Data Governance</a></li>
+                        <li><a href="#">Quality Metrics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Training Resources</a></li>
+                        <li><a href="#">Best Practices</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Data Dictionary</a></li>
+                        <li><a href="#">Schema Registry</a></li>
+                        <li><a href="#">Lineage Viewer</a></li>
+                        <li><a href="#">Usage Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Goldman Sachs</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Goldman Sachs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
