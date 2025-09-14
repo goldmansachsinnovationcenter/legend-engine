@@ -435,6 +435,9 @@ public class Server<T extends ServerConfiguration> extends Application<T>
         environment.jersey().register(new TestDataGeneration(modelManager));
         environment.jersey().register(new TestDataGenerationAPI(modelManager, planExecutor));
         environment.jersey().register(new FCT());
+
+        environment.jersey().register(new org.finos.legend.engine.kafka.api.KafkaConsumerLagApi());
+
         enableCors(environment, serverConfiguration);
     }
 

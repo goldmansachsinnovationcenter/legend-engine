@@ -91,6 +91,7 @@
 
         <!-- Misc -->
         <module>legend-engine-xts-authentication</module>
+        <module>legend-engine-xts-kafka</module>
         <module>legend-engine-xts-protocol-java-generation</module>
         <module>legend-engine-config</module>
 
