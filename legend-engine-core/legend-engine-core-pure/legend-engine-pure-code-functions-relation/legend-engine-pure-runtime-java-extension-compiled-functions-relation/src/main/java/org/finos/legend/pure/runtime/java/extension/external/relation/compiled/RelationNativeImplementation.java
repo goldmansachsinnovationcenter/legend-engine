@@ -72,6 +72,18 @@ public class RelationNativeImplementation
         return ((RelationType) t._classifierGenericType()._typeArguments().getFirst()._rawType())._columns();
     }
 
+    public static <T> Object getLambdaRelationType(LambdaFunction<?> lambda)
+    {
+        RelationType relationType = (RelationType) lambda._classifierGenericType()
+                ._typeArguments().getFirst()
+                ._rawType()
+                ._returnType()
+                ._typeArguments().getFirst()
+                ._rawType();
+        
+        return relationType;
+    }
+
     public static <T, V> RichIterable<V> map(Relation<? extends T> rel, Function2<RowContainer, ExecutionSupport, RichIterable<V>> pureFunction, ExecutionSupport es)
     {
         TestTDSCompiled tds = RelationNativeImplementation.getTDS(rel);

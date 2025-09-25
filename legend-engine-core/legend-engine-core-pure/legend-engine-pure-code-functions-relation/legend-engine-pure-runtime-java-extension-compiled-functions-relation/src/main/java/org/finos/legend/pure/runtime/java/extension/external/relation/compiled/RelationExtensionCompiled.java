@@ -49,6 +49,7 @@ public class RelationExtensionCompiled implements CompiledExtension
                 new Size(),
                 new Filter(),
                 new Columns(),
+                new GetLambdaRelationType(),
                 new Concatenate(),
                 new AsOfJoin(),
                 new Join(),

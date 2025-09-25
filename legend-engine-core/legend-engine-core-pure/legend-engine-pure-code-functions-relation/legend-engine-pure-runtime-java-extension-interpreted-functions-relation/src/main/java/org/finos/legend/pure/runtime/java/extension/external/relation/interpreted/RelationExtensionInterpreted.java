@@ -29,6 +29,7 @@ import org.finos.legend.pure.m3.navigation.type.Type;
 import org.finos.legend.pure.m4.coreinstance.CoreInstance;
 import org.finos.legend.pure.runtime.java.extension.external.relation.interpreted.natives.AsOfJoin;
 import org.finos.legend.pure.runtime.java.extension.external.relation.interpreted.natives.Columns;
+import org.finos.legend.pure.runtime.java.extension.external.relation.interpreted.natives.GetLambdaRelationType;
 import org.finos.legend.pure.runtime.java.extension.external.relation.interpreted.natives.Concatenate;
 import org.finos.legend.pure.runtime.java.extension.external.relation.interpreted.natives.CumulativeDistribution;
 import org.finos.legend.pure.runtime.java.extension.external.relation.interpreted.natives.DenseRank;
@@ -108,6 +109,7 @@ public class RelationExtensionInterpreted extends BaseInterpretedExtension
                 Tuples.pair("project_C_MANY__FuncColSpecArray_1__Relation_1_", Project::new),
                 Tuples.pair("project_Relation_1__FuncColSpecArray_1__Relation_1_", ProjectRelation::new),
                 Tuples.pair("columns_Relation_1__Column_MANY_", Columns::new),
+                Tuples.pair("getLambdaRelationType_Function_1__RelationType_1_", GetLambdaRelationType::new),
                 Tuples.pair("select_Relation_1__Relation_1_", Select::new),
                 Tuples.pair("select_Relation_1__ColSpec_1__Relation_1_", Select::new),
                 Tuples.pair("select_Relation_1__ColSpecArray_1__Relation_1_", Select::new),
