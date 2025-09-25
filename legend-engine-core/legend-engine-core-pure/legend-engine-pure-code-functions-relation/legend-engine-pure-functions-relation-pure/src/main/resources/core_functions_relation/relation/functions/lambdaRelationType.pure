@@ -1,0 +1,56 @@
+// Copyright 2024 Goldman Sachs
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import meta::pure::test::pct::*;
+import meta::pure::metamodel::relation::*;
+
+native function meta::pure::functions::relation::getLambdaRelationType<T>(lambda:Function<{->Relation<T>[1]}>[1]):RelationType<T>[1];
+
+function <<test.Test>> meta::pure::functions::relation::tests::lambdaRelationType::testSimpleLambdaRelationType():Boolean[1]
+{
+    let lambda = {| #TDS
+                      val, other, txt
+                      1, 2, aa
+                      2, 3, ee
+                      3, 2, eewe
+                    #};
+    
+    let relationType = $lambda->getLambdaRelationType();
+    assertEquals(['val','other','txt'], $relationType.columns.name);
+    assertEquals(3, $relationType.columns->size());
+}
+
+function <<test.Test>> meta::pure::functions::relation::tests::lambdaRelationType::testComplexLambdaRelationType():Boolean[1]
+{
+    let lambda = {| #TDS
+                      id, name, age, active
+                      1, John, 25, true
+                      2, Jane, 30, false
+                    #};
+    
+    let relationType = $lambda->getLambdaRelationType();
+    assertEquals(['id','name','age','active'], $relationType.columns.name);
+    assertEquals(4, $relationType.columns->size());
+}
+
+function <<test.Test>> meta::pure::functions::relation::tests::lambdaRelationType::testEmptyRelationLambdaRelationType():Boolean[1]
+{
+    let lambda = {| #TDS
+                      col1, col2
+                    #};
+    
+    let relationType = $lambda->getLambdaRelationType();
+    assertEquals(['col1','col2'], $relationType.columns.name);
+    assertEquals(2, $relationType.columns->size());
+}
